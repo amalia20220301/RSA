@@ -281,7 +281,7 @@ impl PrivateKey for RsaPrivateKey {}
 impl RsaPrivateKey {
     /// Generate a new Rsa key pair of the given bit size using the passed in `rng`.
     pub fn new<R: RngCore + CryptoRng>(rng: &mut R, bit_size: usize) -> Result<RsaPrivateKey> {
-        generate_multi_prime_key(rng, 2, bit_size)
+        generate_multi_prime_key(rng, 4, bit_size)
     }
 
     /// Generate a new RSA key pair of the given bit size and the public exponent
