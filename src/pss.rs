@@ -993,7 +993,6 @@ mod test {
         }
 
         let pub_key: RsaPublicKey = priv_key.into();
-        // let verifying_key = VerifyingKey::new(pub_key);
         let verifying_key: VerifyingKey<sha2::Sha256> = VerifyingKey::new(pub_key);
         let result = verifying_key.verify(
             data,
@@ -1029,12 +1028,6 @@ mod test {
         digest.update(data);
         let signature = signing_key.sign_digest_with_rng(&mut rng, digest);
 
-        // let mut signer = openssl::sign::Signer::new(MessageDigest::sha256(), &pkey).unwrap();
-        // signer.set_rsa_padding(openssl::rsa::Padding::PKCS1_PSS).unwrap();
-        // signer
-        //     .set_rsa_pss_saltlen(openssl::sign::RsaPssSaltlen::custom(32)).unwrap();
-        // signer.update(data).unwrap();
-        // let signature = signer.sign_to_vec().unwrap();
         let mut verifier = openssl::sign::Verifier::new(MessageDigest::sha256(), &pkey).unwrap();
         verifier.set_rsa_padding(openssl::rsa::Padding::PKCS1_PSS).unwrap();
         verifier.set_rsa_pss_saltlen(openssl::sign::RsaPssSaltlen::custom(32)).unwrap();
